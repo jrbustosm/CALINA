@@ -18,7 +18,6 @@ class EffectMessage(
         appViewModel: AppViewModel,
         params: List<Any>
     ): Pair<Boolean, String> {
-        println(msg)
         return Pair(false, msg)
     }
 }

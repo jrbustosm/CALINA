@@ -95,8 +95,8 @@ fun DialogUseCard(
                 if (!appViewModel.appUIState.isTeacher()) {
                     //Card of money
                     cardUIState.execTriggers(EventType.OnUse, appViewModel)
-                    val current = appViewModel.currentGroup!!.copy(
-                        cash = appViewModel.currentGroup!!.cash + cardUIState.cash
+                    val current = appViewModel.appUIState.currentGroup!!.copy(
+                        cash = appViewModel.appUIState.currentGroup!!.cash + cardUIState.cash
                     )
                     appViewModel.delete(cardUIState)
                     cardUIState.execTriggers(EventType.OnDestroy, appViewModel)

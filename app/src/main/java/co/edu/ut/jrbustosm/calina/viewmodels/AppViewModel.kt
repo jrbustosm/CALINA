@@ -21,13 +21,15 @@ class AppViewModel(
     private val repository: AppRepository
 ): ViewModel() {
 
-    var currentGroup: CardUIState? = null
     var appUIState by mutableStateOf(AppUIState())
-        private set
 
     private var fetchJob: Job? = null
 
-    fun fetchCards(type: TypeCardCALINA? = null, state: StateCardCALINA? = null) {
+    fun fetchCards(
+        type: TypeCardCALINA? = null,
+        state: StateCardCALINA? = null,
+        after: (()-> Unit)? = null
+    ) {
         fetchJob?.cancel()
         val appViewModel = this
         fetchJob = viewModelScope.launch {
@@ -36,8 +38,9 @@ class AppViewModel(
                     repository.populate()
                     initCurrentSelect()
                 }
-                var cards = repository.byType(type, state, currentGroup)
+                var cards = repository.byType(type, state, appUIState.currentGroup)
                 val myImei = repository.getMyIMEI()
+                val language = repository.getLanguage()
 
                 //remove card that expired
                 val now = LocalDate.now()
@@ -53,16 +56,32 @@ class AppViewModel(
                         }
                     }
                 }
-                if(flag) cards = repository.byType(type, state, currentGroup)
+                if(flag) cards = repository.byType(type, state, appUIState.currentGroup)
                 appUIState.copy(
                     cards = cards,
                     my_imei = myImei!!,
-                    currentGroup = currentGroup
+                    language = language!!
                 )
             }catch (ioe: IOException){
                 val errorMessage = getMessagesFromThrowable(ioe)
                 appUIState.copy(errorMessage = errorMessage)
             }
+            if(after!=null) after()
+        }
+    }
+
+    suspend fun setLanguage(language: String){
+        appUIState = appUIState.copy(
+            language = language
+        )
+        repository.setLanguage(language)
+        if(appUIState.currentGroup!=null && appUIState.currentGroup!!.imei_card == "0"){
+            appUIState = appUIState.copy(
+                currentGroup = appUIState.currentGroup!!.copy(
+                    lang = language
+                )
+            )
+            updateGroupSelect(appUIState.currentGroup!!)
         }
     }
 
@@ -81,6 +100,7 @@ class AppViewModel(
     }
 
     fun initCurrentSelect() {
+        var currentGroup: CardUIState? = null
         var first:CardUIState? = null
         for (c in byType(TypeCardCALINA.GROUP)) {
             if(first==null) first=c
@@ -89,15 +109,24 @@ class AppViewModel(
                 break
             }
         }
-        if(currentGroup==null) currentGroup=first
+        appUIState = if(currentGroup==null)
+            appUIState.copy(
+                currentGroup = first
+            )
+        else
+            appUIState.copy(
+                currentGroup = currentGroup
+            )
     }
 
     fun updateGroupSelect(cardUIState: CardUIState){
         viewModelScope.launch {
-            currentGroup?.let { update(it.copy(isSelect = false)) }
-            currentGroup = cardUIState
+            appUIState.currentGroup?.let { update(it.copy(isSelect = false)) }
+            appUIState = appUIState.copy(
+                currentGroup = cardUIState
+            )
             fetchCards(appUIState.filterCard, appUIState.stateCard)
-            currentGroup?.let { update(it.copy(isSelect = true)) }
+            appUIState.currentGroup?.let { update(it.copy(isSelect = true)) }
         }
     }
 
@@ -105,13 +134,15 @@ class AppViewModel(
         viewModelScope.launch {
             if(cardUIState.type == TypeCardCALINA.GROUP && !cardUIState.isSecondary){
                 val numberGroups = byType(TypeCardCALINA.GROUP).filter { c->
-                    !c.isSecondary && c.imei_maker == currentGroup?.imei_maker
+                    !c.isSecondary && c.imei_maker == appUIState.currentGroup?.imei_maker
                 }.size
                 appUIState.cards.forEach { c ->
                     if(c.scope != null || numberGroups==1) repository.delete(c)
                 }
-                currentGroup = byType(TypeCardCALINA.GROUP).first()
-                currentGroup?.let { update(it.copy(isSelect = true)) }
+                appUIState = appUIState.copy(
+                    currentGroup = byType(TypeCardCALINA.GROUP).first()
+                )
+                appUIState.currentGroup?.let { update(it.copy(isSelect = true)) }
             }else {
                 repository.delete(cardUIState)
             }

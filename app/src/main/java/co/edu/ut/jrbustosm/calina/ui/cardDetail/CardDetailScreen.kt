@@ -48,7 +48,7 @@ fun GetCardDetailScreen(
     }
 
     Scaffold(
-        topBar = { GetBackTopBarUI(navController, appViewModel.currentGroup?.title ?: "") },
+        topBar = { GetBackTopBarUI(navController, appViewModel.appUIState.currentGroup?.title ?: "") },
         bottomBar = { GetCardDetailBottomBarUI(navController, cardUIState, appViewModel)}
     ) { padding ->
         Box(Modifier
@@ -69,7 +69,7 @@ fun GetCardDetailScreen(
                     contentColor = MaterialTheme.colors.onPrimary,
                 ) {
                     if (cardUIState.date_expire == null)
-                        Text(text = "Card never expired")
+                        Text(text = stringResource(R.string.dateexpirednever))
                     else{
                         val localDate = cardUIState.date_expire.asLocalDate()
                         val now = LocalDate.now()

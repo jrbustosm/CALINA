@@ -69,14 +69,14 @@ fun GetMainBottomBarUI(appViewModel: AppViewModel){
             Pair(stringResource(R.string.make_card), Pair(Icons.Filled.AddCircle) {showCreateTypeCard=true}),
             Pair(stringResource(R.string.send_money), Pair(Icons.Filled.Send){
                 if(appViewModel.appUIState.isTeacher() ||
-                    !appViewModel.appUIState.isTeacher() && appViewModel.currentGroup!!.cash>0)
+                    !appViewModel.appUIState.isTeacher() && appViewModel.appUIState.currentGroup!!.cash>0)
                     showAmountSend=true
             })
         ) else listOf(
             Pair(stringResource(R.string.identity_QR_code), Pair(Icons.Filled.Person){showQRIdentity=true}),
             Pair(stringResource(R.string.send_money), Pair(Icons.Filled.Send){
                 if(appViewModel.appUIState.isTeacher() ||
-                    !appViewModel.appUIState.isTeacher() && appViewModel.currentGroup!!.cash>0)
+                    !appViewModel.appUIState.isTeacher() && appViewModel.appUIState.currentGroup!!.cash>0)
                     showAmountSend=true})
         )
         screens.forEach { screen ->

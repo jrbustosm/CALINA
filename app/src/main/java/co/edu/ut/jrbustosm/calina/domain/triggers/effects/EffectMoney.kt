@@ -18,12 +18,14 @@ class EffectMoney(
         appViewModel: AppViewModel,
         params: List<Any>
     ): Pair<Boolean, String> {
-        val newCurrentGroup = appViewModel.currentGroup!!.copy(
-            cash = appViewModel.currentGroup!!.cash + n
+        val newCurrentGroup = appViewModel.appUIState.currentGroup!!.copy(
+            cash = appViewModel.appUIState.currentGroup!!.cash + n
         )
-        appViewModel.currentGroup = newCurrentGroup
-        appViewModel.update(appViewModel.currentGroup!!)
-        appViewModel.updateGroupSelect(appViewModel.currentGroup!!)
+        appViewModel.appUIState = appViewModel.appUIState.copy(
+            currentGroup = newCurrentGroup
+        )
+        appViewModel.update(appViewModel.appUIState.currentGroup!!)
+        appViewModel.updateGroupSelect(appViewModel.appUIState.currentGroup!!)
         return Pair(false, "")
     }
 }

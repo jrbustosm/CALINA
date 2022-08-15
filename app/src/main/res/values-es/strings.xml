@@ -20,7 +20,7 @@
     <string name="select_group">Seleccione un grupo</string>
     <string name="make_card">Fabricar carta</string>
     <string name="send_money">Enviar dinero</string>
-    <string name="identity_QR_code">Código de identidad QR</string>
+    <string name="identity_QR_code">Código QR de ID</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancelar</string>
     <string name="please_confirm">Por favor confirmar</string>
@@ -47,7 +47,7 @@
     <string name="create">Crear</string>
     <string name="number">Número</string>
     <string name="number_of_groupcard">Número de la carta de grupo</string>
-    <string name="youhave_teacherrol">Tú tines el rol de docente</string>
+    <string name="youhave_teacherrol">Tú tienes el rol de docente</string>
     <string name="difficulty_toget">Dificultad para conseguirla</string>
     <string name="is_global">Es global</string>
     <string name="is_giftable">Es regalable</string>

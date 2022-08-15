@@ -24,7 +24,8 @@ class GetStartCALINADB(context: Context): GetPopulateDB(context) {
                 "trigger" to "W_N:6_C:${context.getString(R.string.easter_egg)} 1:${context.getString(R.string.congratulation_easter_egg)}:R:W:100:item272:0#V",
                 "url" to "http://tinyurl.com/53wuyf4f",
                 "difficulty" to DifficultyCardCALINA.VERY_EASY.id,
-                "isCloneable" to true
+                "isCloneable" to true,
+                "lang" to "en"
             ),
         )
         l.forEach {
@@ -54,7 +55,8 @@ class GetStartCALINADB(context: Context): GetPopulateDB(context) {
                 levels = "",
                 level = "",
                 date_reg = null,
-                url = it["url"] as String
+                url = it["url"] as String,
+                lang = it["lang"] as String
             ))
         }
     }

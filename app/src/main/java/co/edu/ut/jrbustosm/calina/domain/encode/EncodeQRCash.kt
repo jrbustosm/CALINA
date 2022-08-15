@@ -3,7 +3,6 @@ package co.edu.ut.jrbustosm.calina.domain.encode
 import android.content.Context
 import co.edu.ut.jrbustosm.calina.R
 import co.edu.ut.jrbustosm.calina.data.asDate
-import co.edu.ut.jrbustosm.calina.data.getResource
 import co.edu.ut.jrbustosm.calina.domain.GenIMEI
 import co.edu.ut.jrbustosm.calina.viewmodels.AppViewModel
 import co.edu.ut.jrbustosm.calina.viewmodels.states.CardUIState
@@ -26,7 +25,7 @@ class EncodeQRCash: EncodeQR() {
             state = StateCardCALINA.NORMAL,
             isSymbol = false,
             isCloneable = false,
-            imei_maker = appViewModel.currentGroup!!.imei_maker,
+            imei_maker = appViewModel.appUIState.currentGroup!!.imei_maker,
             imei_owner = identity,
             type = TypeCardCALINA.ACTION,
             difficulty = DifficultyCardCALINA.EASY,
@@ -34,7 +33,7 @@ class EncodeQRCash: EncodeQR() {
             trigger = "",
             title = context.getString(R.string.money_card),
             count = 0,
-            scope = appViewModel.currentGroup!!.imei_card,
+            scope = appViewModel.appUIState.currentGroup!!.imei_card,
             date_create = Date(),
             date_expire = expired.asDate(),
             isEdit = false,
@@ -47,10 +46,11 @@ class EncodeQRCash: EncodeQR() {
             isSecondary = false,
             isSelect = false,
             description = "${context.getString(R.string.when_youreceive)} " +
-                    "${appViewModel.currentGroup!!.cash_symbol} $amount",
+                    "${appViewModel.appUIState.currentGroup!!.cash_symbol} $amount",
             number = 7777,
             date_reg = null,
-            url = ""
+            url = "",
+            lang = appViewModel.appUIState.language
         )
         return this(cardUIState)
     }

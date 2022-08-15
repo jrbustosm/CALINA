@@ -2,9 +2,7 @@ package co.edu.ut.jrbustosm.calina.ui.main
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,8 +18,11 @@ import co.edu.ut.jrbustosm.calina.data.getResource
 import co.edu.ut.jrbustosm.calina.domain.cardcreator.GroupDialogCreate
 import co.edu.ut.jrbustosm.calina.domain.triggers.EventType
 import co.edu.ut.jrbustosm.calina.ui.commons.dialogs.DialogCreateCardUseCase
+import co.edu.ut.jrbustosm.calina.ui.setAppLocale
 import co.edu.ut.jrbustosm.calina.viewmodels.AppViewModel
 import co.edu.ut.jrbustosm.calina.viewmodels.states.TypeCardCALINA
+import kotlinx.coroutines.launch
+import java.util.*
 
 @ExperimentalFoundationApi
 @Composable
@@ -150,19 +151,50 @@ fun GetMainDrawerUI(
                     .padding(horizontal = 10.dp)
             )
             Spacer(Modifier.height(30.dp))
-            Text(
-                text = "${stringResource(R.string.changeLanguage)}: EN",
-                textAlign = TextAlign.Left,
-                style = MaterialTheme.typography.body1,
-                modifier = Modifier
-                    .clickable {
-
+            var showLanguage by remember { mutableStateOf(false) }
+            Box{
+                Text(
+                    text = "${stringResource(R.string.changeLanguage)}: ${appViewModel.appUIState.language}",
+                    textAlign = TextAlign.Left,
+                    style = MaterialTheme.typography.body1,
+                    modifier = Modifier
+                        .clickable {
+                            showLanguage = true
+                        }
+                        .padding(horizontal = 20.dp, vertical = 5.dp)
+                        .background(colorUnselect)
+                        .fillMaxWidth()
+                        .padding(horizontal = 10.dp)
+                )
+                val context = LocalContext.current
+                val coroutineScope = rememberCoroutineScope()
+                DropdownMenu(
+                    expanded = showLanguage,
+                    onDismissRequest = { showLanguage = false },
+                    modifier = Modifier
+                        .background(MaterialTheme.colors.onBackground),
+                ) {
+                    val items = listOf("es", "en")
+                    items.forEach { text ->
+                        DropdownMenuItem(onClick = {
+                            coroutineScope.launch {
+                                context.setAppLocale(text, appViewModel)
+                                appViewModel.updateGroupSelect(
+                                    appViewModel.byType(TypeCardCALINA.GROUP).first().copy(
+                                        scope = text
+                                    )
+                                )
+                            }
+                            showLanguage = false
+                        }) {
+                            Text(
+                                text = text,
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
                     }
-                    .padding(horizontal = 20.dp, vertical = 5.dp)
-                    .background(colorUnselect)
-                    .fillMaxWidth()
-                    .padding(horizontal = 10.dp)
-            )
+                }
+            }
             Spacer(Modifier.height(10.dp))
             Text(
                 text = stringResource(R.string.about_calina),

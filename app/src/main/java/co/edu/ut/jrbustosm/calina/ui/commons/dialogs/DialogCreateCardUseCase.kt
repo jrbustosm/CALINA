@@ -459,7 +459,7 @@ fun DialogCreateCardUseCase(
                 OutlinedButton(
                     enabled = title!="" && description!="",
                     onClick = {
-                        scope = if(isGlobal) null else appViewModel.currentGroup?.imei_card
+                        scope = if(isGlobal) null else appViewModel.appUIState.currentGroup?.imei_card
                         val type: TypeCardCALINA
                         if(useCase(DialogFragment.GROUP)){
                             type = TypeCardCALINA.GROUP
@@ -500,7 +500,8 @@ fun DialogCreateCardUseCase(
                             imei_maker = appViewModel.appUIState.my_imei,
                             isSymbol = false,
                             date_reg = null,
-                            url = url
+                            url = url,
+                            lang = appViewModel.appUIState.language
                         )
                         if(cardUIState==null)
                             appViewModel.insert(card)

@@ -7,7 +7,7 @@ import java.util.*
 
 abstract class GetPopulateDB(val context: Context) {
 
-    private val isRootTest = true
+    private val isRootTest = false
     protected val myIMEI = if(isRootTest) "CALINA_HxH_1729" else GenIMEI()()
 
     abstract operator fun invoke(): Sequence<Card>

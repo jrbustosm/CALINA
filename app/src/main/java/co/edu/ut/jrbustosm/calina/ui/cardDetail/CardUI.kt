@@ -133,7 +133,7 @@ private fun GetCardDraw(cardUIState: CardUIState, appViewModel: AppViewModel) {
             cardUIState.state == StateCardCALINA.USED) {
             val text =
                 if (cardUIState.state == StateCardCALINA.BUY) {
-                    val currentGroup = appViewModel.currentGroup!!
+                    val currentGroup = appViewModel.appUIState.currentGroup!!
                     "${stringResource(R.string.buyfor)} ${currentGroup.cash_symbol}${cardUIState.cash}"
                 }else
                     "${stringResource(R.string.used_by)} ${cardUIState.level}"

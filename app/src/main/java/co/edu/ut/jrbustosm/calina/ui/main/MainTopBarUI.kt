@@ -32,7 +32,8 @@ fun GetMainTopBarUI(appViewModel: AppViewModel, onClickMenu:()->Unit) {
                 expanded = showMenu,
                 onDismissRequest = { showMenu = false },
                 modifier = Modifier
-                    .background(MaterialTheme.colors.onBackground),
+                    .background(MaterialTheme.colors.onBackground)
+                    .width(200.dp),
             ) {
                 val items = listOf(
                     Pair(stringResource(R.string.filterAll), Pair(null, null)),
@@ -97,6 +98,6 @@ private fun GetNavButton(onClick: () -> Unit = {}) {
 
 @Composable
 private fun GetTitle(appViewModel: AppViewModel) {
-    val title = appViewModel.currentGroup?.title ?: stringResource(id = R.string.app_name)
+    val title = appViewModel.appUIState.currentGroup?.title ?: stringResource(id = R.string.app_name)
     Text(text = title)
 }

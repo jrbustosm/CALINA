@@ -26,4 +26,6 @@ abstract class AppRepository(
     abstract suspend fun update(cardUIState: CardUIState)
     abstract suspend fun delete(cardUIState: CardUIState)
     abstract suspend fun getMyIMEI(): String?
+    abstract suspend fun getLanguage(): String?
+    abstract suspend fun setLanguage(s: String)
 }

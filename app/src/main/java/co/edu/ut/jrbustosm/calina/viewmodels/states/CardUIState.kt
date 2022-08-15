@@ -36,7 +36,8 @@ data class CardUIState(
     val isSecondary: Boolean,
     val levels: String,
     val level: String,
-    val url: String
+    val url: String,
+    val lang: String
 ){
     var triggers: MutableList<Trigger> = mutableListOf()
 
@@ -54,7 +55,7 @@ data class CardUIState(
             imei_card, imei_maker, title, description, imageResource, type, difficulty, isSymbol,
             number, imei_owner, trigger, state, count, date_create, date_expire, date_reg, scope,
             isTransfer, isCloneable, isEdit, cash, cash_symbol, isSelect, isSecondary, levels,
-            level, url
+            level, url, lang
         )
         return Gson().toJson(cardLight, CardUIStateLight::class.java)
     }
@@ -78,7 +79,8 @@ data class CardUIState(
         }
         if(sb.isNotEmpty())
             appViewModel.appUIState.message = appViewModel.appUIState.message + "\n" + sb.toString()
-        appViewModel.updateGroupSelect(appViewModel.currentGroup!!)
+        if(appViewModel.appUIState.currentGroup!=null)
+            appViewModel.updateGroupSelect(appViewModel.appUIState.currentGroup!!)
         return flag
     }
 }

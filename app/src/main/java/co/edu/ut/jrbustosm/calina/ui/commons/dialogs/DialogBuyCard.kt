@@ -20,9 +20,9 @@ fun DialogBuyCard(
     var showDialogNoMoney by remember { mutableStateOf(false) }
     DialogConfirm(
         confirm = {
-            if(appViewModel.currentGroup!!.cash >= cardUIState.cash){
-                val current = appViewModel.currentGroup!!.copy(
-                    cash = appViewModel.currentGroup!!.cash - cardUIState.cash
+            if(appViewModel.appUIState.currentGroup!!.cash >= cardUIState.cash){
+                val current = appViewModel.appUIState.currentGroup!!.copy(
+                    cash = appViewModel.appUIState.currentGroup!!.cash - cardUIState.cash
                 )
                 cardUIState.execTriggers(EventType.OnBuy, appViewModel)
                 appViewModel.update(cardUIState.copy(
@@ -40,10 +40,10 @@ fun DialogBuyCard(
         },
         cancel = close,
         text = "${stringResource(R.string.you_wantspend)} " +
-                "${appViewModel.currentGroup!!.cash_symbol} ${cardUIState.cash}" +
+                "${appViewModel.appUIState.currentGroup!!.cash_symbol} ${cardUIState.cash}" +
                 " ${stringResource(R.string.to_buy_card)}." +
                 stringResource(R.string.you_have_money) +
-                " ${appViewModel.currentGroup!!.cash_symbol} ${appViewModel.currentGroup!!.cash}"
+                " ${appViewModel.appUIState.currentGroup!!.cash_symbol} ${appViewModel.appUIState.currentGroup!!.cash}"
     )
 
     if(showDialogNoMoney)

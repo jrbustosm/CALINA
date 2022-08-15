@@ -62,7 +62,8 @@ class TriggerTest{
                 isCloneable = false,
                 isSymbol = false,
                 date_reg = null,
-                url = ""
+                url = "",
+                lang = ""
             )
         }
     }

@@ -64,8 +64,8 @@ fun DialogSendMoney(
                     context = context
                 )
                 if (!appViewModel.appUIState.isTeacher()) {
-                    val current = appViewModel.currentGroup!!.copy(
-                        cash = appViewModel.currentGroup!!.cash - amountSend
+                    val current = appViewModel.appUIState.currentGroup!!.copy(
+                        cash = appViewModel.appUIState.currentGroup!!.cash - amountSend
                     )
                     appViewModel.update(current)
                     appViewModel.updateGroupSelect(current)
@@ -110,7 +110,7 @@ fun DialogSendMoney(
                 onValueChange = {
                     val t = abs(it.toIntOrNull()?:0)
                     amountSend = if(!appViewModel.appUIState.isTeacher())
-                        if(t>appViewModel.currentGroup!!.cash) appViewModel.currentGroup!!.cash
+                        if(t>appViewModel.appUIState.currentGroup!!.cash) appViewModel.appUIState.currentGroup!!.cash
                         else t
                     else
                         t

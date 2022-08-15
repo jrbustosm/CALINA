@@ -15,5 +15,5 @@ class ConditionMoney(
     }
 
     override fun invoke(appViewModel: AppViewModel, params: List<Any>): Boolean =
-        (appViewModel.currentGroup?.cash ?: 0) >= n
+        (appViewModel.appUIState.currentGroup?.cash ?: 0) >= n
 }

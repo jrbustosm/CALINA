@@ -32,5 +32,6 @@ data class Card(
     var isSecondary: Boolean = false,
     var levels: String = "",            //UNSUPPORTED
     var level: String = "",             //UNSUPPORTED
-    var url: String = ""
+    var url: String = "",
+    var lang:String = ""
 )

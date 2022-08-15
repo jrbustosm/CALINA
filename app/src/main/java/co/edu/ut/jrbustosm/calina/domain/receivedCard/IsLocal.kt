@@ -7,6 +7,6 @@ import co.edu.ut.jrbustosm.calina.viewmodels.states.CardUIState
 class IsLocal: ReceivedCard() {
 
     override fun invoke(cardUIState: CardUIState, appViewModel: AppViewModel): Boolean =
-        cardUIState.scope == appViewModel.currentGroup!!.imei_card
+        cardUIState.scope == appViewModel.appUIState.currentGroup!!.imei_card
 
 }

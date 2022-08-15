@@ -29,5 +29,6 @@ data class CardUIStateLight (
     val isSecondary: Boolean,
     val levels: String,
     val level: String,
-    val url: String
+    val url: String,
+    val lang: String
 )

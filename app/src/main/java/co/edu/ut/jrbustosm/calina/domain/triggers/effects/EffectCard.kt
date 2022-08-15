@@ -66,7 +66,8 @@ class EffectCard(
             imei_card = GenIMEI()(),
             trigger = trigger,
             date_reg = null,
-            url = ""
+            url = "",
+            lang = appViewModel.appUIState.language
         )
         appViewModel.insert(newCard)
         //newCard.execTriggers(EventType.OnReceive, appViewModel)

@@ -40,7 +40,8 @@ class DecodeQRCard: DecodeQR() {
             number = card.number,
             type = card.type,
             title = card.title,
-            url = card.url
+            url = card.url,
+            lang = card.lang
         )
     }
 }

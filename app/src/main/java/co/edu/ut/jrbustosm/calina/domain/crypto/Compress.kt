@@ -48,6 +48,7 @@ class Compress {
             Pair("~\"INFORMATION\"", "~k"),
             Pair("~\"GROUP\"", "~l"),
             Pair("\"date_reg\":", "m~"),
+            Pair("\"lang\":", "n~"),
         )
     }
 

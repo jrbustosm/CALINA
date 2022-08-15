@@ -13,13 +13,14 @@ class EffectRemoveTrigger(
         appViewModel: AppViewModel,
         params: List<Any>
     ): Pair<Boolean, String> {
-        println(cardUIState.title)
         val newCard = cardUIState.copy(
             trigger = ""
         )
         if(cardUIState.type==TypeCardCALINA.GROUP && !cardUIState.isSecondary &&
-                cardUIState.imei_card == appViewModel.currentGroup!!.imei_card)
-            appViewModel.currentGroup = newCard
+                cardUIState.imei_card == appViewModel.appUIState.currentGroup!!.imei_card)
+            appViewModel.appUIState = appViewModel.appUIState.copy(
+                currentGroup = newCard
+            )
         appViewModel.update(newCard)
         return Pair(false, "")
     }

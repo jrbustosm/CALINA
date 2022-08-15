@@ -62,5 +62,21 @@ class AppRepositoryDB(context: Context) : AppRepository(context){
     override suspend fun getMyIMEI(): String? =
         room.cardDao().getCard(context.getString(R.string.IMEI_BI), "0")?.imei_owner
 
+    override suspend fun getLanguage(): String {
+        val card = room.cardDao().getCard(context.getString(R.string.IMEI_BI), "0")
+        return card!!.lang
+    }
+
+    override suspend fun setLanguage(s:String){
+        val card = room.cardDao().getCard(context.getString(R.string.IMEI_BI), "0")
+        if(card!=null) {
+            room.cardDao().update(card.copy(
+                lang = s
+            ))
+        }
+    }
+
+
+
     override suspend fun populate() = room.cardDao().insert(GetStartCALINADB(context)().toList())
 }

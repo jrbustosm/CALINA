@@ -17,12 +17,12 @@ import java.text.DecimalFormat
 @Composable
 fun GetCashUI(appViewModel: AppViewModel) {
 
-    val symbol = if(appViewModel.currentGroup==null) "$"
-    else appViewModel.currentGroup!!.cash_symbol.toString()
+    val symbol = if(appViewModel.appUIState.currentGroup==null) "$"
+    else appViewModel.appUIState.currentGroup!!.cash_symbol.toString()
 
     val f = DecimalFormat("#,##0")
-    val cash = if(appViewModel.currentGroup==null) "0"
-    else f.format(appViewModel.currentGroup!!.cash)
+    val cash = if(appViewModel.appUIState.currentGroup==null) "0"
+    else f.format(appViewModel.appUIState.currentGroup!!.cash)
 
     Text(
         text =

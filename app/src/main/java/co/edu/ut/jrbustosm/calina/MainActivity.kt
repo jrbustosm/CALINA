@@ -18,12 +18,18 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import co.edu.ut.jrbustosm.calina.repositories.AppRepository
 import co.edu.ut.jrbustosm.calina.repositories.AppRepositoryDB
-import co.edu.ut.jrbustosm.calina.ui.main.GetMainScreen
-import co.edu.ut.jrbustosm.calina.ui.theme.CALINATheme
 import co.edu.ut.jrbustosm.calina.ui.cardDetail.GetCardDetailScreen
+import co.edu.ut.jrbustosm.calina.ui.main.GetMainScreen
+import co.edu.ut.jrbustosm.calina.ui.setAppLocale
+import co.edu.ut.jrbustosm.calina.ui.theme.CALINATheme
 import co.edu.ut.jrbustosm.calina.viewmodels.AppViewModel
 import co.edu.ut.jrbustosm.calina.viewmodels.AppViewModelFactory
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
+@DelicateCoroutinesApi
 class MainActivity : ComponentActivity() {
 
     @ExperimentalFoundationApi
@@ -54,7 +60,13 @@ class MainActivity : ComponentActivity() {
             appViewModel.fetchCards(
                 appViewModel.appUIState.filterCard,
                 appViewModel.appUIState.stateCard
-            )//Get All Cards
+            ){
+                appViewModel.updateGroupSelect(appViewModel.appUIState.currentGroup!!)
+            }//Get All Cards
+
+            GlobalScope.launch(Dispatchers.Main) {
+                context.setAppLocale(appViewModel.appUIState.language, appViewModel)
+            }
 
             CALINATheme {
 
