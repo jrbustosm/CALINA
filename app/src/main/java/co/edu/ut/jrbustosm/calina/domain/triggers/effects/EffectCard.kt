@@ -1,7 +1,6 @@
 package co.edu.ut.jrbustosm.calina.domain.triggers.effects
 
 import co.edu.ut.jrbustosm.calina.domain.GenIMEI
-import co.edu.ut.jrbustosm.calina.domain.triggers.EventType
 import co.edu.ut.jrbustosm.calina.viewmodels.AppViewModel
 import co.edu.ut.jrbustosm.calina.viewmodels.states.CardUIState
 import co.edu.ut.jrbustosm.calina.viewmodels.states.DifficultyCardCALINA

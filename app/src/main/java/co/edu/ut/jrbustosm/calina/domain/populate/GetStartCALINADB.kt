@@ -22,7 +22,9 @@ class GetStartCALINADB(context: Context): GetPopulateDB(context) {
                 "cash" to 0,
                 "state" to StateCardCALINA.NORMAL,
                 "trigger" to "W_N:6_C:${context.getString(R.string.easter_egg)} 1:${context.getString(R.string.congratulation_easter_egg)}:R:W:100:item272:0#V",
-                "url" to "http://tinyurl.com/53wuyf4f"
+                "url" to "http://tinyurl.com/53wuyf4f",
+                "difficulty" to DifficultyCardCALINA.VERY_EASY.id,
+                "isCloneable" to true
             ),
         )
         l.forEach {
@@ -31,7 +33,7 @@ class GetStartCALINADB(context: Context): GetPopulateDB(context) {
                 imei_maker = context.getString(R.string.IMEI_BI),
                 title = it["title"] as String,
                 description = it["description"] as String,
-                difficulty = DifficultyCardCALINA.VERY_EASY.id,
+                difficulty = it["difficulty"] as Char,
                 state = (it["state"] as StateCardCALINA).id,
                 type = (it["type"] as TypeCardCALINA).id,
                 image = it["image"] as String,
@@ -43,7 +45,7 @@ class GetStartCALINADB(context: Context): GetPopulateDB(context) {
                 scope = null,
                 date_expire = null,
                 isEdit = false,
-                isCloneable = false,
+                isCloneable = it["isCloneable"] as Boolean,
                 isTransfer = false,
                 cash = it["cash"] as Int,
                 cash_symbol = if (it["type"] as TypeCardCALINA == TypeCardCALINA.GROUP) '¢' else '\u0000',
