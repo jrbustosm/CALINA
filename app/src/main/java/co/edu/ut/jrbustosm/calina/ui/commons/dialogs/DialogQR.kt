@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -57,9 +58,9 @@ fun DialogQR(text: String, title: String, close: ()->Unit){
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
+                    val context = LocalContext.current
                     OutlinedButton(
                         onClick = {
-                            val context = MainActivity.appContext
                             val intent = Intent(Intent.ACTION_SEND).setType("image/*")
                             val bitmap = generateQRBitmap(text).asAndroidBitmap()
                             val bytes = ByteArrayOutputStream()
@@ -78,6 +79,7 @@ fun DialogQR(text: String, title: String, close: ()->Unit){
                                     Uri.parse(path)
                                 }
                                 intent.putExtra(Intent.EXTRA_STREAM, uri)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK + Intent.FLAG_ACTIVITY_CLEAR_TOP
                                 Intent.createChooser(intent, null)
                             }catch (e: Exception){
                                 null
