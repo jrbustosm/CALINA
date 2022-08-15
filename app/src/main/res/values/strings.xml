@@ -6,16 +6,9 @@
     <string name="destroy">Destroy</string>
     <string name="you_have">You have</string>
     <string name="in_cash">in cash</string>
-    <string name="titleCard0">Adventurer\'s Welcome</string>
-    <string name="descCard0">I welcome you to this application, for the moment you receive this card as a reward for installing CALINA</string>
-    <string name="titleCard1">CALINA neophyte</string>
     <string name="IMEI_BI">CALINA_HxH_1729</string>
-    <string name="descCard1">Go to the following link and claim your reward</string>
-    <string name="CALINA_VERSION">1</string>
     <string name="titleCard2">CALINA</string>
     <string name="descCard2">CALINA APP GROUP</string>
-    <string name="titleCard3">Payday</string>
-    <string name="descCard3">The creators of CALINA give you ¢100</string>
     <string name="filterAll">All</string>
     <string name="filterAction">Action Card</string>
     <string name="filterInformation">Informative Card</string>
@@ -24,7 +17,6 @@
     <string name="share">Share</string>
     <string name="edit">Edit</string>
     <string name="select_group">Select a group</string>
-    <string name="test">TEST</string>
     <string name="make_card">Make Card</string>
     <string name="send_money">Send Money</string>
     <string name="identity_QR_code">Identity QR code</string>
@@ -58,7 +50,6 @@
     <string name="difficulty_toget">Difficulty to get</string>
     <string name="is_global">is Global</string>
     <string name="is_giftable">is Giftable</string>
-    <string name="is_salable">is Salable</string>
     <string name="is_cloneable">is Cloneable</string>
     <string name="is_editable">is Editable</string>
     <string name="group_card">Group Card</string>
@@ -94,13 +85,9 @@
     <string name="you_wantspend">You want to spend</string>
     <string name="to_buy_card">to buy this card?</string>
     <string name="you_dontenoughmoney">You don\'t have enough money</string>
-    <string name="titleCard4">Nice stone</string>
-    <string name="descCard4">A stone that like all stones does nothing, just exist</string>
     <string name="you_have_money">You have</string>
     <string name="used">Used</string>
     <string name="you_cantthisinfo">You can\'t see this information until you buy the card</string>
-    <string name="titleCard5">Secret information</string>
-    <string name="descCard5">CALINA is full of Easter eggs, there are 5 in total, can you find them all?</string>
     <string name="doyouwant_use">Do you want to use this card?</string>
     <string name="used_by">Used by</string>
     <string name="name">Name:</string>
