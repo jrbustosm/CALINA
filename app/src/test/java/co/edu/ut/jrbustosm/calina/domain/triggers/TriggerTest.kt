@@ -63,7 +63,8 @@ class TriggerTest{
                 isSymbol = false,
                 date_reg = null,
                 url = "",
-                lang = ""
+                lang = "",
+                isDeletable = false
             )
         }
     }

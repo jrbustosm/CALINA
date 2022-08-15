@@ -30,5 +30,6 @@ data class CardUIStateLight (
     val levels: String,
     val level: String,
     val url: String,
-    val lang: String
+    val lang: String,
+    val isDeletable: Boolean
 )

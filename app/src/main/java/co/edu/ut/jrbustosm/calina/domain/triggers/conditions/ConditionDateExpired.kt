@@ -21,6 +21,6 @@ class ConditionDateExpired(
         if(cardUIState.date_expire == null) return false
         val localDate = cardUIState.date_expire.asLocalDate()
         val dayDiff = ChronoUnit.DAYS.between(LocalDate.now(), localDate)
-        return n <= dayDiff
+        return n.toLong() == dayDiff
     }
 }

@@ -50,7 +50,8 @@ class EncodeQRCash: EncodeQR() {
             number = 7777,
             date_reg = null,
             url = "",
-            lang = appViewModel.appUIState.language
+            lang = appViewModel.appUIState.language,
+            isDeletable = true
         )
         return this(cardUIState)
     }

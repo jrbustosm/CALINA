@@ -30,6 +30,7 @@ data class Card(
     var cash_symbol: Char = '¢',
     var isSelect: Boolean = false,
     var isSecondary: Boolean = false,
+    var isDeletable: Boolean = false,
     var levels: String = "",            //UNSUPPORTED
     var level: String = "",             //UNSUPPORTED
     var url: String = "",

@@ -72,6 +72,7 @@ fun DialogCreateCardUseCase(
     var isTransfer by remember { mutableStateOf(cardUIState?.isTransfer ?: true)}
     var isEdit by remember { mutableStateOf(cardUIState?.isEdit ?: false)}
     var isCloneable by remember { mutableStateOf(cardUIState?.isCloneable ?: true)}
+    var isDeletable by remember { mutableStateOf(cardUIState?.isDeletable ?: true)}
     var scope by remember { mutableStateOf<String?>(cardUIState?.scope)}
     var isGlobal by remember { mutableStateOf(if(cardUIState==null) false else cardUIState.scope==null)}
     var trigger by remember { mutableStateOf(cardUIState?.trigger ?: "")}
@@ -413,25 +414,43 @@ fun DialogCreateCardUseCase(
                             style = MaterialTheme.typography.caption
                         )
                     }
-                    if(useCase(DialogFragment.INFORMATION)){
-                        Row(horizontalArrangement = Arrangement.End) {
-                            //-------------------------------------------------------
-                            // Add Edit switch (INFORMATION)
-                            //-------------------------------------------------------
-                            Text(
-                                text = stringResource(R.string.is_editable),
-                                color = if(isEdit) MaterialTheme.colors.onPrimary
-                                else MaterialTheme.colors.primary,
-                                textAlign = TextAlign.Left,
-                                style = MaterialTheme.typography.caption
-                            )
-                            Spacer(modifier = Modifier.width(5.dp))
-                            Switch(
-                                checked = isEdit,
-                                onCheckedChange = { isEdit = it },
-                                colors = switchColors
-                            )
-                        }
+                    Row(horizontalArrangement = Arrangement.End) {
+                        //-------------------------------------------------------
+                        // Add Deleteable switch (INFORMATION)
+                        //-------------------------------------------------------
+                        Text(
+                            text = stringResource(R.string.isDeleteable),
+                            color = if(isDeletable) MaterialTheme.colors.onPrimary
+                            else MaterialTheme.colors.primary,
+                            textAlign = TextAlign.Left,
+                            style = MaterialTheme.typography.caption
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Switch(
+                            checked = isDeletable,
+                            onCheckedChange = { isDeletable = it },
+                            colors = switchColors
+                        )
+                    }
+                }
+                if(useCase(DialogFragment.INFORMATION)){
+                    Row(horizontalArrangement = Arrangement.Start) {
+                        //-------------------------------------------------------
+                        // Add Edit switch (INFORMATION)
+                        //-------------------------------------------------------
+                        Text(
+                            text = stringResource(R.string.is_editable),
+                            color = if(isEdit) MaterialTheme.colors.onPrimary
+                            else MaterialTheme.colors.primary,
+                            textAlign = TextAlign.Left,
+                            style = MaterialTheme.typography.caption
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
+                        Switch(
+                            checked = isEdit,
+                            onCheckedChange = { isEdit = it },
+                            colors = switchColors
+                        )
                     }
                 }
             }
@@ -501,7 +520,8 @@ fun DialogCreateCardUseCase(
                             isSymbol = false,
                             date_reg = null,
                             url = url,
-                            lang = appViewModel.appUIState.language
+                            lang = appViewModel.appUIState.language,
+                            isDeletable = isDeletable
                         )
                         if(cardUIState==null)
                             appViewModel.insert(card)

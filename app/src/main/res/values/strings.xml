@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">CALINA</string>
     <string name="use">Use</string>
     <string name="sell">Sell</string>
@@ -27,7 +27,7 @@
     <string name="destroy_card">The following action destroys the card forever.</string>
     <string name="destroy_group">The following action destroys the group of cards forever.</string>
     <string name="select_difficulty">Select Difficulty</string>
-    <string name="very_easy">Very Easy (C)</string>
+    <string name="very_easy" tools:ignore="TypographyOther">Very Easy (C)</string>
     <string name="easy">Easy (B)</string>
     <string name="normal">Normal (A)</string>
     <string name="hard">Hard (S)</string>
@@ -104,4 +104,5 @@
     <string name="save">Save</string>
     <string name="easter_egg">Easter egg</string>
     <string name="congratulation_easter_egg">Congratulations, you already have one of the five CALINA easter eggs</string>
+    <string name="isDeleteable">is Deleteable</string>
 </resources>

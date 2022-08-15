@@ -41,7 +41,8 @@ class DecodeQRCard: DecodeQR() {
             type = card.type,
             title = card.title,
             url = card.url,
-            lang = card.lang
+            lang = card.lang,
+            isDeletable = card.isDeletable
         )
     }
 }

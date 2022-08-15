@@ -161,6 +161,7 @@ fun GetMainScreen(
                     items(appViewModel.appUIState.cards) { card ->
                         card.execTriggers(EventType.OnList, appViewModel)
                         GetMiniCardUI(cardUIState = card, onClick = {
+                            card.execTriggers(EventType.OnOpenDetail, appViewModel)
                             navController.navigate(
                                 route = "cardDetail/${card.imei_maker}/${card.imei_card}"
                             )

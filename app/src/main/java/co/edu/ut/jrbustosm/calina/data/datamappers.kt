@@ -43,7 +43,8 @@ fun Card.toCardUI():CardUIState = CardUIState(
     level = level,
     date_reg = date_reg,
     url = url,
-    lang = lang
+    lang = lang,
+    isDeletable = isDeletable
 )
 
 fun CardUIState.toCard():Card = Card(
@@ -73,7 +74,8 @@ fun CardUIState.toCard():Card = Card(
     level = level,
     date_reg = date_reg,
     url = url,
-    lang = lang
+    lang = lang,
+    isDeletable = isDeletable
 )
 
 fun LocalDate.asDate(): Date =

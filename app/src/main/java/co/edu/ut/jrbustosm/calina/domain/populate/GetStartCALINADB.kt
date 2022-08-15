@@ -25,7 +25,8 @@ class GetStartCALINADB(context: Context): GetPopulateDB(context) {
                 "url" to "http://tinyurl.com/53wuyf4f",
                 "difficulty" to DifficultyCardCALINA.VERY_EASY.id,
                 "isCloneable" to true,
-                "lang" to "en"
+                "lang" to "en",
+                "isDeletable" to false
             ),
         )
         l.forEach {
@@ -56,7 +57,8 @@ class GetStartCALINADB(context: Context): GetPopulateDB(context) {
                 level = "",
                 date_reg = null,
                 url = it["url"] as String,
-                lang = it["lang"] as String
+                lang = it["lang"] as String,
+                isDeletable = it["isDeletable"] as Boolean
             ))
         }
     }

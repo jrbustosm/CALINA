@@ -11,9 +11,6 @@ class ShowButtonDestroy: ShowUseCase() {
         cardUIState: CardUIState,
         appUIState: AppUIState,
         context: Context?,
-    ): Boolean =
-        (cardUIState.imei_maker != context?.getString(R.string.IMEI_BI) ||
-        cardUIState.imei_card != "0") &&
-        cardUIState.date_expire == null
+    ): Boolean = cardUIState.isDeletable
 
 }

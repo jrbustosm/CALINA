@@ -17,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import co.edu.ut.jrbustosm.calina.R
 import co.edu.ut.jrbustosm.calina.data.asLocalDate
-import co.edu.ut.jrbustosm.calina.domain.triggers.EventType
 import co.edu.ut.jrbustosm.calina.ui.commons.GetBackTopBarUI
 import co.edu.ut.jrbustosm.calina.ui.commons.GetBackgroundImg
 import co.edu.ut.jrbustosm.calina.ui.commons.dialogs.DialogConfirm
@@ -33,7 +32,6 @@ import java.time.temporal.ChronoUnit
 fun GetCardDetailScreen(
     cardUIState: CardUIState, appViewModel: AppViewModel, navController: NavController
 ){
-    cardUIState.execTriggers(EventType.OnOpenDetail, appViewModel)
 
     var showDialogMsg by remember { mutableStateOf(appViewModel.appUIState.message.isNotEmpty())}
     if(showDialogMsg){

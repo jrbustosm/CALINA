@@ -20,6 +20,6 @@ class ConditionDateCreate(
     override fun invoke(appViewModel: AppViewModel, params: List<Any>): Boolean{
         val localDate = cardUIState.date_create.asLocalDate()
         val dayDiff = ChronoUnit.DAYS.between(localDate, LocalDate.now())
-        return n >= dayDiff
+        return n.toLong() == dayDiff
     }
 }

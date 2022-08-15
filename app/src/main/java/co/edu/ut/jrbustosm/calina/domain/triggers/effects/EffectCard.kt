@@ -20,10 +20,9 @@ class EffectCard(
     var number = 0
     var image = "symbol1"
     var isTransfer = false
-    var trigger = ""
 
     init {
-        if(params.size==8){
+        if(params.size==7){
             title = params[0]
             description = params[1]
             type = TypeCardCALINA.getType(params[2][0])
@@ -31,7 +30,6 @@ class EffectCard(
             number =params[4].toIntOrNull()?:0
             image = params[5]
             isTransfer = params[6][0] == '1'
-            trigger = params[7]
         }
     }
 
@@ -64,10 +62,11 @@ class EffectCard(
             imei_maker = cardUIState.imei_maker,
             imei_owner = appViewModel.appUIState.my_imei,
             imei_card = GenIMEI()(),
-            trigger = trigger,
+            trigger = "",
             date_reg = null,
             url = "",
-            lang = appViewModel.appUIState.language
+            lang = appViewModel.appUIState.language,
+            isDeletable = true
         )
         appViewModel.insert(newCard)
         //newCard.execTriggers(EventType.OnReceive, appViewModel)

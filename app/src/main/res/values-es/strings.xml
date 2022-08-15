@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">CALINA</string>
     <string name="use">Usar</string>
     <string name="sell">Vender</string>
@@ -28,7 +28,7 @@
     <string name="destroy_card">La siguiente acción destruye la carta para siempre.</string>
     <string name="destroy_group">La siguiente acción destruye el grupo de cartas para siempre.</string>
     <string name="select_difficulty">Seleccione dificultad</string>
-    <string name="very_easy">Muy fácil (C)</string>
+    <string name="very_easy" tools:ignore="TypographyOther">Muy fácil (C)</string>
     <string name="easy">Fácil (B)</string>
     <string name="normal">Normal (A)</string>
     <string name="hard">Difícil (S)</string>
@@ -37,7 +37,7 @@
     <string name="select_typecard">Seleccione un tipo de carta</string>
     <string name="clone">Clonar</string>
     <string name="imteacher_creategroup">Soy docente, deseo crear un grupo</string>
-    <string name="about_calina">Sobre CALINA...</string>
+    <string name="about_calina">Sobre CALINA</string>
     <string name="title">Título</string>
     <string name="description">Descripción</string>
     <string name="cash_symbol">Símbolo de moneda</string>
@@ -105,4 +105,5 @@
     <string name="save">Guardar</string>
     <string name="easter_egg">Huevo de pascua</string>
     <string name="congratulation_easter_egg">Felicidades, ya tienes una de las cinco cartas ocultas de CALINA</string>
+    <string name="isDeleteable">Es Borrable</string>
 </resources>

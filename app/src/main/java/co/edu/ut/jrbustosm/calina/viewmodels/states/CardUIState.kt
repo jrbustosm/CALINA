@@ -37,7 +37,8 @@ data class CardUIState(
     val levels: String,
     val level: String,
     val url: String,
-    val lang: String
+    val lang: String,
+    val isDeletable: Boolean
 ){
     var triggers: MutableList<Trigger> = mutableListOf()
 
@@ -55,7 +56,7 @@ data class CardUIState(
             imei_card, imei_maker, title, description, imageResource, type, difficulty, isSymbol,
             number, imei_owner, trigger, state, count, date_create, date_expire, date_reg, scope,
             isTransfer, isCloneable, isEdit, cash, cash_symbol, isSelect, isSecondary, levels,
-            level, url, lang
+            level, url, lang, isDeletable
         )
         return Gson().toJson(cardLight, CardUIStateLight::class.java)
     }

@@ -16,6 +16,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import co.edu.ut.jrbustosm.calina.domain.triggers.EventType
 import co.edu.ut.jrbustosm.calina.repositories.AppRepository
 import co.edu.ut.jrbustosm.calina.repositories.AppRepositoryDB
 import co.edu.ut.jrbustosm.calina.ui.cardDetail.GetCardDetailScreen
