@@ -21,7 +21,7 @@ fun DialogBuyCard(
     DialogConfirm(
         confirm = {
             if(appViewModel.appUIState.currentGroup!!.cash >= cardUIState.cash){
-                val current = appViewModel.appUIState.currentGroup!!.copy(
+                val currentGroup = appViewModel.appUIState.currentGroup!!.copy(
                     cash = appViewModel.appUIState.currentGroup!!.cash - cardUIState.cash
                 )
                 cardUIState.execTriggers(EventType.OnBuy, appViewModel)
@@ -29,8 +29,10 @@ fun DialogBuyCard(
                     state = StateCardCALINA.NORMAL,
                     cash = 0
                 ))
-                appViewModel.update(current)
-                appViewModel.updateGroupSelect(current)
+                appViewModel.update(currentGroup)
+                appViewModel.appUIState = appViewModel.appUIState.copy(
+                    currentGroup = currentGroup
+                )
                 close()
                 navController.popBackStack()
                 navController.navigate(

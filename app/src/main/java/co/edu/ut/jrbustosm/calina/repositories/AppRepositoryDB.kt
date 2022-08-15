@@ -59,8 +59,8 @@ class AppRepositoryDB(context: Context) : AppRepository(context){
     override suspend fun delete(cardUIState: CardUIState) =
         room.cardDao().delete(cardUIState.toCard())
 
-    override suspend fun getMyIMEI(): String? =
-        room.cardDao().getCard(context.getString(R.string.IMEI_BI), "0")?.imei_owner
+    override suspend fun getMyIMEI(): String =
+        room.cardDao().getCard(context.getString(R.string.IMEI_BI), "0")?.imei_owner!!
 
     override suspend fun getLanguage(): String {
         val card = room.cardDao().getCard(context.getString(R.string.IMEI_BI), "0")

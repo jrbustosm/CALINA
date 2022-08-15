@@ -57,16 +57,13 @@ class MainActivity : ComponentActivity() {
                 AppViewModelFactory(appRepository)
             }
 
-            appViewModel.fetchCards(
-                appViewModel.appUIState.filterCard,
-                appViewModel.appUIState.stateCard
-            ){
-                appViewModel.updateGroupSelect(appViewModel.appUIState.currentGroup!!)
-            }//Get All Cards
+            appViewModel.fetchCards(){
+                GlobalScope.launch(Dispatchers.Main) {
+                    context.setAppLocale(appViewModel.appUIState.language, appViewModel)
+                }
+            }   //Get All Cards
 
-            GlobalScope.launch(Dispatchers.Main) {
-                context.setAppLocale(appViewModel.appUIState.language, appViewModel)
-            }
+
 
             CALINATheme {
 

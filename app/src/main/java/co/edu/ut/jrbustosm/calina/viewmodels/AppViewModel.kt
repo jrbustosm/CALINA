@@ -28,21 +28,21 @@ class AppViewModel(
     fun fetchCards(
         type: TypeCardCALINA? = null,
         state: StateCardCALINA? = null,
-        after: (()-> Unit)? = null
+        after: (()->Unit)? = null
     ) {
         fetchJob?.cancel()
         val appViewModel = this
         fetchJob = viewModelScope.launch {
             appUIState = try {
-                if(repository.count()==0) {
+                if(repository.count()==0)
                     repository.populate()
-                    initCurrentSelect()
-                }
-                var cards = repository.byType(type, state, appUIState.currentGroup)
+
                 val myImei = repository.getMyIMEI()
                 val language = repository.getLanguage()
+                val currentGroup = getCurrentSelect()
 
                 //remove card that expired
+                var cards = repository.byType(type, state, currentGroup)
                 val now = LocalDate.now()
                 var flag = false
                 for(c in cards){
@@ -56,33 +56,31 @@ class AppViewModel(
                         }
                     }
                 }
-                if(flag) cards = repository.byType(type, state, appUIState.currentGroup)
+                if(flag) cards = repository.byType(type, state, currentGroup)
+
                 appUIState.copy(
                     cards = cards,
-                    my_imei = myImei!!,
-                    language = language!!
+                    my_imei = myImei,
+                    language = language,
+                    currentGroup = currentGroup
                 )
+
             }catch (ioe: IOException){
                 val errorMessage = getMessagesFromThrowable(ioe)
-                appUIState.copy(errorMessage = errorMessage)
+                appUIState.copy(
+                    errorMessage = errorMessage
+                )
             }
             if(after!=null) after()
         }
     }
 
     suspend fun setLanguage(language: String){
-        appUIState = appUIState.copy(
-            language = language
-        )
         repository.setLanguage(language)
-        if(appUIState.currentGroup!=null && appUIState.currentGroup!!.imei_card == "0"){
-            appUIState = appUIState.copy(
-                currentGroup = appUIState.currentGroup!!.copy(
-                    lang = language
-                )
-            )
-            updateGroupSelect(appUIState.currentGroup!!)
-        }
+        appUIState = appUIState.copy(
+            language = language,
+            currentGroup = getCurrentSelect()
+        )
     }
 
     fun getByID(imei_maker: String, imei_card: String) = runBlocking {
@@ -99,7 +97,7 @@ class AppViewModel(
         }
     }
 
-    fun initCurrentSelect() {
+    private fun getCurrentSelect(): CardUIState {
         var currentGroup: CardUIState? = null
         var first:CardUIState? = null
         for (c in byType(TypeCardCALINA.GROUP)) {
@@ -109,24 +107,19 @@ class AppViewModel(
                 break
             }
         }
-        appUIState = if(currentGroup==null)
-            appUIState.copy(
-                currentGroup = first
-            )
-        else
-            appUIState.copy(
-                currentGroup = currentGroup
-            )
+        return currentGroup ?: first!!
     }
 
-    fun updateGroupSelect(cardUIState: CardUIState){
+    fun updateGroupSelect(cardUIState: CardUIState? = null){
         viewModelScope.launch {
-            appUIState.currentGroup?.let { update(it.copy(isSelect = false)) }
-            appUIState = appUIState.copy(
-                currentGroup = cardUIState
-            )
+            if(cardUIState!=null) {
+                appUIState.currentGroup?.let { update(it.copy(isSelect = false)) }
+                appUIState = appUIState.copy(
+                    currentGroup = cardUIState
+                )
+                appUIState.currentGroup?.let { update(it.copy(isSelect = true)) }
+            }
             fetchCards(appUIState.filterCard, appUIState.stateCard)
-            appUIState.currentGroup?.let { update(it.copy(isSelect = true)) }
         }
     }
 
@@ -166,6 +159,6 @@ class AppViewModelFactory(private val repository: AppRepository) :
     ViewModelProvider.Factory{
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AppViewModel(repository).apply { initCurrentSelect() } as T
+        return AppViewModel(repository).apply { fetchCards() } as T
     }
 }

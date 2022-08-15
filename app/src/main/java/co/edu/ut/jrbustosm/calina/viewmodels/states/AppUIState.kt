@@ -1,8 +1,5 @@
 package co.edu.ut.jrbustosm.calina.viewmodels.states
 
-import co.edu.ut.jrbustosm.calina.viewmodels.AppViewModel
-import org.intellij.lang.annotations.Language
-
 data class AppUIState(
 
     val cards: List<CardUIState> = listOf(),
@@ -13,7 +10,7 @@ data class AppUIState(
     val my_imei: String = "",
     val currentGroup: CardUIState? = null,
     var message: String = "",
-    var language: String = ""
+    val language: String = ""
 
     ){
 

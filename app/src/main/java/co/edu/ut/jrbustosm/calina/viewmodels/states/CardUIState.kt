@@ -80,7 +80,7 @@ data class CardUIState(
         if(sb.isNotEmpty())
             appViewModel.appUIState.message = appViewModel.appUIState.message + "\n" + sb.toString()
         if(appViewModel.appUIState.currentGroup!=null)
-            appViewModel.updateGroupSelect(appViewModel.appUIState.currentGroup!!)
+            appViewModel.updateGroupSelect()
         return flag
     }
 }

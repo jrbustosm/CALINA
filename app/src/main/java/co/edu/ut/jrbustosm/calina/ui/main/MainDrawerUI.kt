@@ -179,11 +179,6 @@ fun GetMainDrawerUI(
                         DropdownMenuItem(onClick = {
                             coroutineScope.launch {
                                 context.setAppLocale(text, appViewModel)
-                                appViewModel.updateGroupSelect(
-                                    appViewModel.byType(TypeCardCALINA.GROUP).first().copy(
-                                        scope = text
-                                    )
-                                )
                             }
                             showLanguage = false
                         }) {
