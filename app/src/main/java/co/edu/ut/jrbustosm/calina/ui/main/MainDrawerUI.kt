@@ -31,6 +31,36 @@ fun GetMainDrawerUI(
     close: ()->Unit
 ) {
 
+    var showAbout by remember { mutableStateOf(false) }
+    if(showAbout){
+        AlertDialog(
+            onDismissRequest = { showAbout = false },
+            confirmButton =  {
+                TextButton(onClick = {showAbout = false})
+                { Text(text = stringResource(R.string.ok)) }
+            },
+            title = { Text(text = stringResource(R.string.about_calina))},
+            text = {
+                Column(modifier = Modifier.fillMaxWidth()) {
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = "Calina es una aplicación construida en la Universidad del Tolima " +
+                            "por José Ricardo Bustos como proyecto de grado de Maestría" +
+                            "\n\n" +
+                            "Calina ayuda a gamificar su ejercicio docente, disfrutala es libre"
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Image(
+                        modifier = Modifier.fillMaxWidth(),
+                        painter = painterResource(id = R.drawable.hoja_final),
+                        contentDescription = ""
+                    )
+
+                }
+            }
+        )
+    }
+
     var showCreateCard by remember { mutableStateOf(false) }
     if(showCreateCard) DialogCreateCardUseCase(
         appViewModel, useCase = GroupDialogCreate()
@@ -197,7 +227,7 @@ fun GetMainDrawerUI(
                 style = MaterialTheme.typography.body1,
                 modifier = Modifier
                     .clickable {
-
+                        showAbout = true
                     }
                     .padding(horizontal = 20.dp, vertical = 5.dp)
                     .background(colorUnselect)
