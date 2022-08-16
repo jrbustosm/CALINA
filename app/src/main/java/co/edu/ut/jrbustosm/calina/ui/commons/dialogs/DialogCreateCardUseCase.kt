@@ -438,18 +438,18 @@ fun DialogCreateCardUseCase(
                         //-------------------------------------------------------
                         // Add Edit switch (INFORMATION)
                         //-------------------------------------------------------
+                        Switch(
+                            checked = isEdit,
+                            onCheckedChange = { isEdit = it },
+                            colors = switchColors
+                        )
+                        Spacer(modifier = Modifier.width(5.dp))
                         Text(
                             text = stringResource(R.string.is_editable),
                             color = if(isEdit) MaterialTheme.colors.onPrimary
                             else MaterialTheme.colors.primary,
                             textAlign = TextAlign.Left,
                             style = MaterialTheme.typography.caption
-                        )
-                        Spacer(modifier = Modifier.width(5.dp))
-                        Switch(
-                            checked = isEdit,
-                            onCheckedChange = { isEdit = it },
-                            colors = switchColors
                         )
                     }
                 }
