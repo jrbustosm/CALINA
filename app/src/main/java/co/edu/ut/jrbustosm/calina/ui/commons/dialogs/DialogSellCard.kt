@@ -56,8 +56,8 @@ fun DialogSellCard(
             OutlinedTextField(
                 value = amountSell.toString(),
                 onValueChange = {
-                    val t = abs(it.toIntOrNull()?:1)
-                    amountSell = if(t==0) 1 else t
+                    val t = abs(it.toIntOrNull()?:0)
+                    amountSell = t
                 },
                 singleLine = true,
                 label = { Text(text = stringResource(R.string.amount_to_sell)) },
