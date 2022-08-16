@@ -106,4 +106,5 @@
     <string name="congratulation_easter_egg">Congratulations, you already have one of the five CALINA easter eggs</string>
     <string name="isDeleteable">is Deleteable</string>
     <string name="about_text">Calina is an application built at the University of Tolima by José Ricardo Bustos as a Master\'s degree project\n\nCalina helps to gamify her teaching exercise, enjoy it is free</string>
+    <string name="create_copy">Copy</string>
 </resources>

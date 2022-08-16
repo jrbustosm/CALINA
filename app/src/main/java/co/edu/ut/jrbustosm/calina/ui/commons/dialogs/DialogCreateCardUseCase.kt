@@ -475,6 +475,61 @@ fun DialogCreateCardUseCase(
                 OutlinedButton(onClick = close) {
                     Text(text = stringResource(id = R.string.cancel))
                 }
+                if(cardUIState!=null) {
+                    OutlinedButton(
+                        enabled = title != "" && description != "",
+                        onClick = {
+                            scope =
+                                if (isGlobal) null else appViewModel.appUIState.currentGroup?.imei_card
+                            val type: TypeCardCALINA
+                            if (useCase(DialogFragment.GROUP)) {
+                                type = TypeCardCALINA.GROUP
+                                isTransfer = false
+                                isCloneable = true
+                            } else if (useCase(DialogFragment.SECONDARY_GROUP)) type =
+                                TypeCardCALINA.GROUP
+                            else if (useCase(DialogFragment.ACTION)) type = TypeCardCALINA.ACTION
+                            else if (useCase(DialogFragment.REWARD)) type = TypeCardCALINA.REWARD
+                            else type = TypeCardCALINA.INFORMATION
+
+                            val card = CardUIState(
+                                title = title,
+                                number = number,
+                                description = description,
+                                cash_symbol = cashSymbol,
+                                cash = initialAmount,
+                                isTransfer = isTransfer,
+                                isEdit = isEdit,
+                                isCloneable = isCloneable,
+                                scope = scope,
+                                trigger = trigger,
+                                date_expire = dateExpire,
+                                difficulty = DifficultyCardCALINA.getDifficulty(difficulty),
+                                type = type,
+                                imageResource = image,
+                                isSecondary = useCase(DialogFragment.SECONDARY_GROUP),
+                                imei_card = GenIMEI()(),
+                                isSelect = false,
+                                level = "",
+                                levels = "",
+                                date_create = Date(),
+                                state = StateCardCALINA.NORMAL,
+                                count = 0,
+                                imei_owner = appViewModel.appUIState.my_imei,
+                                imei_maker = appViewModel.appUIState.my_imei,
+                                isSymbol = false,
+                                date_reg = null,
+                                url = url,
+                                lang = appViewModel.appUIState.language,
+                                isDeletable = isDeletable
+                            )
+                            appViewModel.insert(card)
+                            close()
+                        }
+                    ) {
+                        Text(text = stringResource(R.string.create_copy))
+                    }
+                }
                 OutlinedButton(
                     enabled = title!="" && description!="",
                     onClick = {
@@ -508,9 +563,7 @@ fun DialogCreateCardUseCase(
                             isSecondary = useCase(DialogFragment.SECONDARY_GROUP),
                             imei_card = cardUIState?.imei_card ?: GenIMEI()(),
                             isSelect = false,
-                            //TODO: falta
                             level = "",
-                            //TODO: falta
                             levels = "",
                             date_create = Date(),
                             state = StateCardCALINA.NORMAL,

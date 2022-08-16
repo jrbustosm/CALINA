@@ -107,4 +107,5 @@
     <string name="congratulation_easter_egg">Felicidades, ya tienes una de las cinco cartas ocultas de CALINA</string>
     <string name="isDeleteable">Es Borrable</string>
     <string name="about_text">Calina es una aplicación construida en la Universidad del Tolima por José Ricardo Bustos como proyecto de grado de Maestría\n\nCalina ayuda a gamificar su ejercicio docente, disfrutala es libre</string>
+    <string name="create_copy">Copiar</string>
 </resources>
