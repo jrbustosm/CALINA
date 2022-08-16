@@ -22,7 +22,6 @@ import co.edu.ut.jrbustosm.calina.ui.setAppLocale
 import co.edu.ut.jrbustosm.calina.viewmodels.AppViewModel
 import co.edu.ut.jrbustosm.calina.viewmodels.states.TypeCardCALINA
 import kotlinx.coroutines.launch
-import java.util.*
 
 @ExperimentalFoundationApi
 @Composable
@@ -44,10 +43,7 @@ fun GetMainDrawerUI(
                 Column(modifier = Modifier.fillMaxWidth()) {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
-                        text = "Calina es una aplicación construida en la Universidad del Tolima " +
-                            "por José Ricardo Bustos como proyecto de grado de Maestría" +
-                            "\n\n" +
-                            "Calina ayuda a gamificar su ejercicio docente, disfrutala es libre"
+                        text = stringResource(R.string.about_text)
                     )
                     Spacer(modifier = Modifier.height(10.dp))
                     Image(
